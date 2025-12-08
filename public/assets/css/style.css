@@ -1,7 +1,7 @@
 /* ----------Couleur de base----------- */
 :root {
     /* Couleur primaire : Rose/Magenta pour les CTA et les accents (Source: image_456fb9.png) */
-    --color-primary: #d87fcc; 
+    --color-primary: #FF6B6B; 
     --color-primary-dark: #902e99cc; /* Version plus foncée pour le texte ou les bordures */
     --color-primary-light: #fcf0f5; /* Rose très pâle pour les fonds indisponibles */
     
@@ -700,7 +700,7 @@ pour le rendre lisible sur leur fond jaune/blanc d'autofill).*/
 }
 
 /* =========================================
-   SECTION ADMIN DASHBOARD
+    SECTION ADMIN DASHBOARD
    ========================================= */
 
 /* Compensation pour le header fixe sur la page admin */
@@ -727,14 +727,32 @@ pour le rendre lisible sur leur fond jaune/blanc d'autofill).*/
 .fc { 
     color: white !important; 
     font-family: 'Segoe UI', sans-serif;
+    padding: 5px;
 }
 
-/* Grille et bordures */
-.fc-theme-standard td, 
-.fc-theme-standard th,
-.fc-theme-standard .fc-scrollgrid { 
-    border-color: #4C4C4F !important; 
+/* === Personnalisation FullCalendar (Thème CLAIR) === */
+
+/* 1. Fond du calendrier (Blanc ou très clair) */
+.fc-timegrid-body, .fc-theme-standard .fc-scrollgrid {
+    background-color: #ffffff; 
 }
+
+/* 2. Lignes verticales de séparation des jours (Gris foncé pour le contraste) */
+/* On force une bordure droite solide et visible */
+.fc .fc-timegrid-col.fc-day {
+    border-right: 1px solid #6c757d !important; /* Gris moyen/foncé */
+}
+
+/* 3. Supprimer la double bordure sur la toute dernière colonne à droite */
+.fc .fc-timegrid-body > .fc-timegrid-cols > table > tbody > tr > .fc-widget-content:last-child {
+    border-right: none !important;
+}
+
+/* 4. Lignes horizontales (heures) - Gris très léger pour ne pas surcharger */
+.fc-theme-standard td, .fc-theme-standard th {
+    border-color: #dee2e6; /* Gris bootstrap standard */
+}
+
 
 /* En-têtes de jours */
 .fc-col-header-cell-cushion { 
@@ -746,31 +764,39 @@ pour le rendre lisible sur leur fond jaune/blanc d'autofill).*/
 
 /* Heures sur le côté */
 .fc-timegrid-slot-label-cushion { 
-    color: #ccc !important; 
+    color: #726e6e !important; 
 }
 
 /* Ligne rouge "Maintenant" */
 .fc-timegrid-now-indicator-line { 
-    border-color: var(--color-primary) !important; 
+    border-color: red !important; 
     border-width: 2px;
 }
 .fc-timegrid-now-indicator-arrow { 
-    border-color: var(--color-primary) !important; 
+    border-color: red !important; 
     border-width: 6px;
 }
 
 /* Boutons du calendrier (Mois, Semaine, Aujourd'hui) */
 .fc-button-primary {
-    background-color: var(--color-dark) !important;
+    background: linear-gradient(to bottom, var(--color-primary) 20px, black);
     border-color: var(--color-glass-border) !important;
     color: white !important;
     text-transform: capitalize;
 }
 .fc-button-primary:hover, .fc-button-primary.fc-button-active {
-    background-color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
-    color: black !important;
+    background: linear-gradient(to bottom, #4ecdc4 20px, black);
+    border-color: var(--color-glass-border) !important;
+    color: white !important;
 }
+
+.cardcal {
+    background-color: var(--color-dark);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
 
 /* Événements dans le calendrier */
 .fc-event {
@@ -785,4 +811,10 @@ pour le rendre lisible sur leur fond jaune/blanc d'autofill).*/
     /* On pousse le contenu vers le bas car le header fait environ 120px de haut */
     padding-top: 150px; 
     background-color: #262A2C; /* Assure que le fond est sombre comme le reste du site */
+}
+
+
+
+.fc-event-time {
+    font-weight: 700; /* Légèrement plus gras pour l'heure */
 }

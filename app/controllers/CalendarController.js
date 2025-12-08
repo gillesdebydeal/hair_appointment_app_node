@@ -14,7 +14,7 @@ class CalendarController {
         // 1. Nettoyage et validation des paramètres
         const businessId = parseInt(Sanitizer.sanitize(req.query.businessId));
         
-        // CORRECTION : Récupération du PrestaId de la requête (req.query.prestaId)
+        // Récupération du PrestaId de la requête
         const selectedPrestationId = parseInt(Sanitizer.sanitize(req.query.prestaId)); 
         
         let startDateString = Sanitizer.sanitize(req.query.startDate);
@@ -26,7 +26,6 @@ class CalendarController {
 
         // Validation CLÉ : selectedPrestationId doit être présent.
         if (!businessId || !startDateString || !selectedPrestationId) {
-            // Le message d'erreur est plus précis maintenant.
             return res.status(400).json({ message: "Paramètres de calendrier manquants (businessId, startDate, ou prestaId)." });
         }
         
@@ -51,10 +50,9 @@ class CalendarController {
                 const availability = await reservationModel.checkAvailability(
                     businessId, 
                     dateKey, 
-                    // selectedPrestationId est maintenant défini
                     selectedPrestationId, 
                     employeeId, 
-                    null // Reste du code inchangé
+                    null 
                 );
                 
                 // 3. Stockage du résultat
@@ -68,18 +66,21 @@ class CalendarController {
 
         } catch (error) {
             console.error("Erreur lors de la génération du calendrier:", error);
-            // Ajout de l'objet erreur dans la réponse pour le débogage Front-End
             return res.status(500).json({ message: "Erreur serveur lors de la récupération du calendrier.", error: error.message });
         }
     }
 
-        /**
+    /**
      * Endpoint: GET /api/admin/events?businessId=X&start=YYYY-MM-DD&end=YYYY-MM-DD
      * Renvoie les événements formatés pour FullCalendar.
      */
+/**
+/**
+     * Endpoint: GET /api/admin/events?businessId=X&start=YYYY-MM-DD&end=YYYY-MM-DD
+     */
     static async getAdminEvents(req, res) {
         const businessId = parseInt(Sanitizer.sanitize(req.query.businessId));
-        const start = Sanitizer.sanitize(req.query.start); // FullCalendar envoie automatiquement ces paramètres
+        const start = Sanitizer.sanitize(req.query.start);
         const end = Sanitizer.sanitize(req.query.end);
 
         if (!businessId || !start || !end) {
@@ -87,30 +88,60 @@ class CalendarController {
         }
 
         try {
+            // Appel à votre méthode corrigée dans le Modèle
             const rawEvents = await reservationModel.getReservationsByPeriod(businessId, start, end);
             
-            // Mapping pour le format FullCalendar (JSON standard)
-            const events = rawEvents.map(evt => {
-                // Définition des couleurs selon le statut
-                let color = '#95a5a6'; // Gris par défaut
-                if (evt.statut === 'confirmed') color = '#72e2a8ff'; // Vert (Variable CSS --color-available)
-                if (evt.statut === 'pending') color = '#f1b452ff';   // Orange
-                if (evt.statut === 'cancelled') color = '#e7877cff'; // Rouge
+            // DEBUG : Voir ce que la BDD renvoie exactement dans la console serveur
+            if (rawEvents.length > 0) {
+                console.log("Exemple de RDV brut:", rawEvents[0]);
+            }
 
+            // Mapping pour FullCalendar
+            const events = rawEvents.map(evt => {
+                // --- GESTION DES COULEURS ET DU STATUT ---
+                
+                // 1. On récupère le statut et on le met en minuscule pour éviter les bugs (Pending vs pending)
+                // Si le champ est vide ou null, on met 'inconnu'
+                const statut = evt.statut ? evt.statut.toLowerCase() : 'inconnu';
+
+                // 2. Couleurs par défaut (Gris / Blanc)
+                let bgColor = '#6c757d'; 
+                let txtColor = '#ffffff'; 
+
+                // 3. Application des règles de couleur
+                if (statut === 'confirmed' || statut === 'validé') {
+                    bgColor = '#72e2a8';  // Vert
+                    txtColor = '#000000'; // Texte Noir
+                }
+                else if (statut === 'pending' || statut === 'en attente') {
+                    bgColor = '#ffc107';  // Orange
+                    txtColor = '#000000'; // Texte Noir
+                }
+                else if (statut === 'cancelled' || statut === 'annulé') {
+                    bgColor = '#dc3545';  // Rouge
+                    txtColor = '#ffffff'; // Texte Blanc
+                }
+
+                // --- CONSTRUCTION DE L'OBJET JSON ---
                 return {
                     id: evt.id_reservation,
+                    // Titre : "Prénom Nom - Prestation"
                     title: `${evt.client_prenom} ${evt.client_nom} - ${evt.prestation_nom}`,
-                    start: evt.start,
-                    end: evt.end,
+                    start: evt.start, // Vient de r.date_reservation
+                    end: evt.end,     // Vient de r.heure_fin_calculee
                     resourceId: evt.resourceId,
-                    backgroundColor: color,
-                    borderColor: color,
-                    // Données étendues pour le pop-up au clic
+                    
+                    // Apparence
+                    backgroundColor: bgColor,
+                    borderColor: bgColor,
+                    textColor: txtColor,
+
+                    // Données supplémentaires pour le clic (Pop-up)
                     extendedProps: {
                         clientPhone: evt.telephone,
                         price: evt.tarif_forfait,
                         employee: evt.employe_prenom,
-                        status: evt.statut
+                        status: statut // On renvoie le statut normalisé (minuscule)
                     }
                 };
             });
