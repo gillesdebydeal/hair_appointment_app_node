@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hair Appointment</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/Favicon_MASK.png"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">  
+    </head>
+    <body>
+    <!--NAVBAR qui va recouvrir en transparence la photo de la hero section-->
+    <header class="main-header fixed-top">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark p-3">
+        <div class="container-fluid">
+            
+            <a class="navbar-brand" href="./index.html">
+                <img src="assets/img/logoblancMASK.png" alt="Logo Hair Appointment - Book Your Perfect Look" height="100">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarContent" aria-controls="mainNavbarContent" aria-expanded="false" aria-label="Menu de navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="mainNavbarContent">
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="./pages/prestations.html">Prestations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./pages/salons.html">Votre Salon</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./pages/contact.html">Contact</a></li>
+                    
+                    <li class="nav-item ms-lg-3"><a class="btn btn-outline-light rounded-pill" href="./pages/connexion.html">Connexion</a></li>
+                    <li class="nav-item ms-lg-2 "><a class="btn btn-primary rounded-pill" href="./pages/inscription.html">Inscription</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </header>
+    <!--fin de header avec navbar-->
+    <!--Hero section avec image et barre de recherche-->
+    <section class="hero-section position-relative vh-100">
+        
+        <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-center text-light">      
+            <div class="card p-3 shadow-lg booking-capsule-modern">
+
+    <!--ID JS pour lien avec le formulaire de recherche -->
+                <form class="row g-3 p-3" id="search-form">
+                
+                <div class="col-md-6"> 
+                    <label for="search-presta" class="form-label text-dark fs-6">Que cherchez-vous ?</label>
+                    <input type="text" class="form-control form-control-lg rounded-pill" id="search-presta" placeholder="Nom du salon, prestations (coupe...)">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="search-location" class="form-label text-dark fs-6">Où ?</label>
+                    <input type="text" class="form-control form-control-lg rounded-pill" id="search-location" placeholder="Adresse, ville, code postal...">
+                </div>
+                
+                <div class="col-12 col-md-6 d-grid mx-auto mt-4" style="justify-content: center;"> 
+                    <button type="button" class="btn btn-lg btn-primary rounded-pill" id="search-button">Rechercher</button>
+                </div>
+            </form>
+            </div>
+                        <h1 class="display-5 fw-bold mb-5 mt-5">Transformez Votre Style, Révélez Votre Éclat !</h1>
+            </div>
+    </section>
+
+    <main>
+
+    <section id="prestations" class="container py-5">
+
+        <h2 class="display-5 fw-bold mb-5 mt-5">Prestations</h2>
+            <div class="container text-center" >
+        <!-- Sur mobile, empile les colonnes en en faisant une première en pleine largeur et l'autre une demi-largeur. -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG" src="./assets/img/prestations/coupe.png" alt="Coupes">
+                    <div class="overlaytop"><span class="caption ">Coupe</span></div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG"src="./assets/img/prestations/coloration.png" alt="coloration"> 
+                    <div class="overlaytop"><span class="caption">Coloration</span></div>  
+                </div>
+        </div>
+
+        <!-- Les colonnes commencent à 50 % de largeur sur mobile et passent à 33,3 % de largeur sur le bureau -->
+        <div class="row g-2" >
+            <div class="col-md-3">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG"src="./assets/img/prestations/brushing.png" alt="brushing">
+                    <div class="overlaytop"><span class="caption">Brushing</span></div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG"src="./assets/img/prestations/soins.png" alt="soins">
+                    <div class="overlaytop"><span class="caption">Soins</span></div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG"src="./assets/img/prestations/lissage.png" alt="lissage">
+                    <div class="overlaytop"><span class="caption">Lissage</span></div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="photo-overlay-container">
+                    <img class="prestationsIMG"src="./assets/img/prestations/meches.png" alt="mèches">
+                    <div class="overlaytop"><span class="caption">Mèches</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Les colonnes sont toujours larges de 50 %, sur mobile et sur bureau -->
+        <div class="row g-2">
+            <div class="col-md-4">
+                <div class="photo-overlay-container">
+                <img class="prestationsIMG"src="./assets/img/prestations/defrisage.png" alt="defrisage">
+                <div class="overlaytop"><span class="caption">Défrisage</span></div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="photo-overlay-container">
+                <img class="prestationsIMG"src="./assets/img/prestations/balayage.png" alt="balayage">
+                <div class="overlaytop"><span class="caption">Balayage</span></div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-4">
+                <div class="photo-overlay-container">
+                <img class="prestationsIMG"src="./assets/img/prestations/shampoing.png" alt="shampoing">
+                <div class="overlaytop"><span class="caption">Shampoing</span></div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </section>
+<br>
+    </section>
+
+
+<!-- Section tendance Pour Elle et Pour Lui avec 2 carrousel Côte à Côte-->
+<section id="tendances" class="container py-5">
+    <h2 class="display-5 fw-bold mb-5 mt-5">Les tendances</h2>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            
+            <!-- Carrousel pour Elle-->
+            <div class="col-md-6" style="align-items: start;">
+                <h5 class="fw-bold">Pour Elle</h5>
+                <div id="carrouselTendancesElle" class="carousel slide carousel-fade carousCustom">
+                    
+                    <!-- Ajout des tirets pour savoir ou en est l'utilisateur-->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./assets/img/tendances_elle/beach_waves.png" class="d-block w-100" alt="beach_waves">
+                            <div class="carousel-caption d-none d-md-block"><h5>Beach Waves</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/butterfly_cut.png" class="d-block w-100" alt="butterfly_cut">
+                            <div class="carousel-caption d-none d-md-block"><h5>Butterfly Cut</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/curtain_bangs.png" class="d-block w-100" alt="curtain_bangs">
+                            <div class="carousel-caption d-none d-md-block"><h5>Curtain Bangs</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/french_bob.png" class="d-block w-100" alt="french_bob">
+                            <div class="carousel-caption d-none d-md-block"><h5>French Bob</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/high_ponytail.png" class="d-block w-100" alt="high_ponytail">
+                            <div class="carousel-caption d-none d-md-block"><h5>High Ponytail</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/messy-bun.png" class="d-block w-100" alt="messy-bun">
+                            <div class="carousel-caption d-none d-md-block"><h5>Messy Bun</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/shag_cut.png" class="d-block w-100" alt="shag_cut">
+                            <div class="carousel-caption d-none d-md-block"><h5>Shag Cut</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/sleek_wet_look.png" class="d-block w-100" alt="sleek_wet_look">
+                            <div class="carousel-caption d-none d-md-block"><h5>Sleek Wet Look</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_elle/warm_honey.png" class="d-block w-100" alt="warm_honey">
+                            <div class="carousel-caption d-none d-md-block"><h5>Warm Honey</h5></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carrouselTendancesElle" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Carrousel pour Lui-->
+            <div class="col-md-6" style="align-items: start;">
+                <h5 class="fw-bold">Pour Lui</h5>
+                <div id="carrouselTendancesLui" class="carousel slide carousel-fade carousCustom">
+                    
+                    <!-- Ajout des tirets pour savoir ou en est l'utilisateur-->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                        <button type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="./assets/img/tendances_lui/slick_back_homme.png" class="d-block w-100" alt="slick_back_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Slick Back</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/side_part_homme.png" class="d-block w-100" alt="side_part_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Side Part</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/quiff_homme.png" class="d-block w-100" alt="quiff_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Quiff</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/mullet_homme.png" class="d-block w-100" alt="mullet_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Mullet</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/mi_long_homme.png" class="d-block w-100" alt="mi_long_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Mi-Longs</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/eboy_haircut_homme.png" class="d-block w-100" alt="eboy_haircut_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Eboy Haircut</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/buzz_cut_homme.png" class="d-block w-100" alt="buzz_cut_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Buzz Cut</h5></div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="./assets/img/tendances_lui/caesar_cut_homme.png" class="d-block w-100" alt="caesar_cut_homme">
+                            <div class="carousel-caption d-none d-md-block"><h5>Caesar Cut</h5></div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carrouselTendancesLui" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<br>
+
+<!-- carrousel de carte pour les avis client à implémenter via JS puis SQL en version node-->
+<section id="avis" class="container py-5">
+<h2 class="display-5 fw-bold mb-5 mt-5">Ce que disent nos clients</h2>
+
+<div id="avisCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
+    
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="row g-4 justify-content-center">
+                
+                <div class="col-lg-8 col-md-6">
+                    <div class="card card-avis p-4 text-center review-text-container">
+                        <div class="etoiles mb-2">★★★★★</div> <blockquote class="blockquote fst-italic">
+                            "Le balayage était parfait, l'équipe est très professionnelle et le salon magnifique. Je recommande !"
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Marie D. - Technique & Professionnalisme</footer>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="row g-4 justify-content-center">
+                
+                <div class="col-lg-7 col-md-6">
+                    <div class="card card-avis p-4 text-center review-text-container">
+                        <div class="etoiles mb-2">★★★★★</div> <blockquote class="blockquote fst-italic">
+                            "L'expérience de réservation en ligne est d'une simplicité remarquable. J'ai pu choisir mon employé référent en un clic. Le Balayage était spectaculaire et l'équipe est aux petits soins !"
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Sophie L. - Réservation & Technique</footer>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+                <div class="carousel-item">
+            <div class="row g-4 justify-content-center">
+                
+                <div class="col-lg-7 col-md-6">
+                    <div class="card card-avis p-4 text-center review-text-container">
+                        <div class="etoiles mb-2">★★★★★</div> <blockquote class="blockquote fst-italic">
+                            "J'ai opté pour la Prestation Shampoing + Coupe + Brushing. Le résultat est parfait. On sent la qualité des produits utilisés et le conseil est précis. C'est mon nouveau salon attitré."
+                        </blockquote>
+                        <footer class="blockquote-footer mt-2">Marc H. - Prestation Composite</footer>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+        </div>
+    </div>
+</section>
+
+<br>
+
+<!-- Photo du salon-->
+<section id="salon" class="container py-5">
+    <h2 class="display-5 fw-bold mb-5 mt-5">Votre Salon</h2>
+    <br>
+<div class="container">
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="salon-img-wrapper">
+                    <img class="imgSalon" src="./assets/img/salon/salon_ext2.png" alt="salon_exterieur">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="salon-img-wrapper">
+                    <img class="imgSalon" src="./assets/img/salon/salon4.png" alt="produit_soins">
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="salon-img-wrapper">
+                    <img class="imgSalon" src="./assets/img/salon/salon1.png" alt="salon_int">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="salon-img-wrapper">
+                    <img class="imgSalon" src="./assets/img/salon/salon3.png" alt="espace_shampoing">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="salon-img-wrapper">
+                    <img class="imgSalon" src="./assets/img/salon/salon2.png" alt="poste_coiffure">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+</main>
+
+<!-- Footer Avec Grille Bootstrap + emboitement de grille pour les icones médias-->
+<footer class="footer mt-auto py-5 bg-dark text-white footer-custom" style ="border-top: 1px solid #4C4C4F;">
+    <div class="container-fluid text-center">
+    <div class="row" style= "align-items:center;">
+        <div class="col-md-3">
+            <img src="assets/img/logoblancMASK.png" alt="Logo Hair Appointment - Book Your Perfect Look" height="90">  
+        </div>
+        <div class="col-md-3 colfooter">À propos</div>
+        <div class="col-md-3 colfooter">Suivez-nous</div>
+        <div class="col-md-3 colfooter">Recevez nos offres exclusives</div>
+    </div>
+        <div class="row" style= "align-items:center;">
+
+        <div class="col-md-3">
+            <ul class="list-unstyled text-center align-items-center">
+                <li><strong>25, rue de la république</strong></li>
+                <li><strong>69400 Villefranche s/Saône</strong></li>
+                <li class="mt-2">Téléphone : <a href="tel:0474000000" class="footer-link legalink">04 74 00 00 00</a></li>
+                <li>Email : <a href="mailto:contact@hairappointment.com" class="footer-link legalink">contact@hairappointment.com</a></li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-3">
+            <div><a href="./pages/faq.html" class="footer-link legalink">FAQ</a></div>
+            <div><a href="./pages/mentions-legales.html" class="footer-link legalink">Mentions légales</a></div>
+            <div><a href="./pages/politique-confidentialite.html" class="footer-link legalink">Politique de confidentialité</a></div>
+            <div><a href="./pages/conditions-utilisation.html" class="footer-link legalink">Conditions d'utilisation</a></div>
+            <div><a href="./pages/plan-du-site.html" class="footer-link legalink">Plan du site</a></div>
+        </div>
+
+
+<!-- Bloc reseaux sociaux-->
+        <div class="col-md-3">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-facebook-50.png" alt="Facebook"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-instagram-50.png" alt="Instagram"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-x-50.png" alt="Twitter"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-linkedin-50.png" alt="LinkedIn"></div>
+                </div>
+            </div>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-youtube-50.png" alt="YouTube"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-pinterest-50.png" alt="Pinterest"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-tic-tac-50.png" alt="TikTok"></div>
+                    <div class="col-md-3 p-2 social-icon"><img src="./assets/img/social_icon/icons8-google-plus-50.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+<!-- Bloc Newsletter-->
+        <div class="col-md-3">
+            <form>
+                <div class="mb-3 mx-5">
+                    <input type="email" class="form-control" id="emailNewsletter" placeholder="Votre adresse e-mail">
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+        </div>
+
+
+    </div>
+    </div>
+    <div class="text-center mt-4">
+        <small>&copy; 2025 Hair Appointment. Tous droits réservés.</small>
+    </div>
+    <!--CDN Javascript Bootstrap + JS perso-->
+    <script src="./assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</footer>
+</body>
+</html>
