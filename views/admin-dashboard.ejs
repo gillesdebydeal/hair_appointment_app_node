@@ -17,7 +17,6 @@
             <div class="col-md-4">
                 <label for="salon-select" class="h5 fw-bold">Vue du Salon :</label>
                 <select id="salon-select" class="form-select bg-dark text-white border-secondary">
-                    <!--récuère les salons depuis la BDD -->
                     <% if (typeof salons !== 'undefined' && salons.length > 0) { %>
                         <% salons.forEach(function(salon) { %>
                             <option value="<%= salon.id_business %>">
@@ -45,6 +44,50 @@
 
     <%- include('partials/footer2') %>
 
+    <div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="modalTitle">Détails du Rendez-vous</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <strong class="text-secondary">Client :</strong>
+                        <span id="modalClientName" class="d-block fs-5 fw-bold"></span>
+                        <small id="modalClientPhone" class="text-info"></small>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <strong class="text-secondary">Coiffeur :</strong>
+                            <div id="modalEmployee"></div>
+                        </div>
+                        <div class="col-6">
+                            <strong class="text-secondary">Prix :</strong>
+                            <div id="modalPrice" class="fw-bold text-success"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong class="text-secondary">Horaire :</strong>
+                        <div id="modalTime"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong class="text-secondary">Statut :</strong>
+                        <span id="modalStatus" class="badge"></span>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn btn-sm" style ="background-color: #4ecdc4;">Modifier</button>
+                    <button type="button" class="btn btn-danger btn-sm">Annuler RDV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -56,7 +99,6 @@
                 initialView: 'timeGridWeek',
                 locale: 'fr',
                 height: 'auto',
-                // Configuration des textes des boutons
                 buttonText: {
                     today: "Auj.",
                     month: "Mois",
@@ -89,16 +131,61 @@
                         });
                 },
                 eventClick: function(info) {
+                    // Récupération des données étendues envoyées par le contrôleur
                     const props = info.event.extendedProps;
-                    // Vérification de sécurité si props est undefined
-                    const employeeName = props.employee ? props.employee : 'Non assigné';
-                    const price = props.price ? props.price : '0';
                     
-                    alert(`Client : ${info.event.title}\nCoiffeur : ${employeeName}\nPrix : ${price}€`);
+                    // 1. Remplissage des textes de la modale
+                    document.getElementById('modalTitle').textContent = info.event.title;
+                    
+                    // Découpage intelligent du titre "Prénom Nom - Prestation" pour isoler le nom
+                    const titleParts = info.event.title.split(' - ');
+                    document.getElementById('modalClientName').textContent = titleParts[0] || info.event.title;
+                    document.getElementById('modalClientPhone').textContent = props.clientPhone || 'Numéro non renseigné';
+                    
+                    document.getElementById('modalEmployee').textContent = props.employee || 'Non assigné';
+                    document.getElementById('modalPrice').textContent = (props.price || 0) + ' €';
+                    
+                    // Formatage propre des heures (ex: 14:00 - 15:00)
+                    const options = { hour: '2-digit', minute: '2-digit' };
+                    const timeString = info.event.start.toLocaleTimeString('fr-FR', options) + 
+                                    ' - ' + 
+                                    (info.event.end ? info.event.end.toLocaleTimeString('fr-FR', options) : '?');
+                    document.getElementById('modalTime').textContent = timeString;
+
+                    // 2. Gestion du Badge de Statut (Couleur et Texte)
+                    const statusEl = document.getElementById('modalStatus');
+                    // On récupère le statut brut (ex: 'pending')
+                    const statusRaw = props.status ? props.status.toLowerCase() : 'inconnu';
+                    
+                    // --- ÉTAPE DE TRADUCTION ---
+                    let statusText = 'INCONNU';
+                    let badgeClass = 'bg-secondary'; // Couleur par défaut
+
+                    if(statusRaw === 'confirmed' || statusRaw === 'validé') {
+                        statusText = 'VALIDÉ';
+                        badgeClass = 'bg-success';
+                    } 
+                    else if(statusRaw === 'pending' || statusRaw === 'en attente') {
+                        statusText = 'À CONFIRMER'; // Tu peux mettre "EN ATTENTE" si tu préfères
+                        badgeClass = 'bg-warning text-dark';
+                    } 
+                    else if(statusRaw === 'cancelled' || statusRaw === 'annulé') {
+                        statusText = 'ANNULÉ';
+                        badgeClass = 'bg-danger';
+                    }
+
+                    // Mise à jour du texte et des classes
+                    statusEl.textContent = statusText;
+                    statusEl.className = 'badge ' + badgeClass; // On écrase les anciennes classes proprement
+
+                    // 3. Affichage de la modale Bootstrap
+                    const myModal = new bootstrap.Modal(document.getElementById('eventDetailsModal'));
+                    myModal.show();
                 }
             });
             calendar.render();
             
+            // Rafraîchir le calendrier quand on change de salon
             salonSelect.addEventListener('change', () => calendar.refetchEvents());
         });
     </script>
