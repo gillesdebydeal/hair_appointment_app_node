@@ -1,0 +1,91 @@
+
+<!--header EJS-->
+<%- include('partials/header2') %>
+
+
+<main class="container py-5">
+    
+    <section class="page-title-section text-center py-5 pb-3">
+        <div class="container mt-5"> 
+            <h1 class="display-5 fw-bold">Contactez notre équipe</h1>
+            <p class="lead">Nous vous répondrons dans les plus brefs délais.</p>
+        </div>
+    
+            <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                <img src="../assets/img/salon/salon4.png" alt="Salon Hair Appointment" class="img-fluid rounded-4 mb-4" style="max-height: 300px;">
+                </div>
+                <div class="col">
+                <img src="../assets/img/salon/salon_ext.png" alt="Salon Hair Appointment" class="img-fluid rounded-4 mb-4" style="max-height: 300px;">
+                </div>
+                <div class="col">
+                    <img src="../assets/img/salon/salon2.png" alt="Salon Hair Appointment" class="img-fluid rounded-4 mb-4" style="max-height: 300px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-content" class="row g-5 py-5">
+        
+        <div class="col-md-6">
+        <h2 class="h4 fw-bold mb-4">Envoyer un Message</h2>
+            <div class="auth-card p-4 shadow-lg rounded-4">
+                
+                
+                <form id="contact-form">
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6 text-start">
+                            <label for="contactNom" class="form-label">Votre Nom</label>
+                            <input type="text" class="form-control" id="contactNom" name="nom" required>
+                        </div>
+                        <div class="col-md-6 text-start">
+                            <label for="contactEmail" class="form-label">Votre E-mail</label>
+                            <input type="email" class="form-control" id="contactEmail" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label for="contactSubject" class="form-label">Objet du message</label>
+                        <input type="text" class="form-control" id="contactSubject" name="objet" required>
+                    </div>
+
+                    <div class="mb-4 text-start">
+                        <label for="contactMessage" class="form-label">Votre message</label>
+                        <textarea class="form-control" id="contactMessage" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">Envoyer le message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <h2 class="h4 fw-bold mb-4">Informations</h2>
+            
+            <div class="auth-card p-4 shadow-sm rounded-4 text-start">
+                <p class="fw-bold mb-2">Adresse du Salon :</p>
+                <p>25, rue de la république<br>69400 Villefranche s/Saône</p>
+                
+                <p class="fw-bold mt-4 mb-2">Contact Téléphonique :</p>
+                <p><a href="tel:0474000000" class="footer-link textmutedconnexion">04 74 00 00 00</a> (Du Lun. au Ven.)</p>
+
+                <div class="mt-4">
+                    <p class="fw-bold mb-2">Accès :</p>
+                    <div class="map-placeholder">
+                        <!-- Intégration Google Maps -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.1234567890123!2d4.710123456789012!3d45.99012345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4e12345678901%3A0x123456789abcdef0!2s25%20Rue%20de%20la%20R%C3%A9publique%2C%2069400%20Villefranche-sur-Sa%C3%B4ne%2C%20France!5e0!3m2!1sfr!2sus!4v1700000000000!5m2!1sfr!2sus" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+
+<!--footer EJS-->
+<%- include('partials/footer2') %>

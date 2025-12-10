@@ -1,0 +1,58 @@
+
+<!--header EJS-->
+<%- include('partials/header2') %>
+
+
+<!-- Main Content de la page sous le header espace intégré dans le CSS à 150 px-->
+<main class="container py-5">
+    
+    <section class="page-title-section text-center py-5">
+        <div class="container mt-5"> 
+            <h1 class="display-5 fw-bold" id="prestation-title">Détail : [NOM DYNAMIQUE DE LA PRESTATION]</h1>
+            <p class="lead" id="prestation-category">Catégorie : Technique</p>
+        </div>
+    </section>
+
+    <section id="details" class="row g-5 py-5">
+        
+        <div class="col-md-6 order-md-2">
+            <img id="prestation-image" src="../assets/img/placeholder-detail.png" alt="Image de la Prestation" class="img-fluid rounded-4 shadow-lg">
+        </div>
+
+        <div class="col-md-12 mt-5">
+            <div class="expertise-description p-5 rounded-4 shadow-lg">
+                <h2 class="h4 text-center text-uppercase fw-light mb-4">L'Expertise du Salon</h2>
+                <p id="prestation-long-description" class="lead text-start"></p>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 order-md-1">
+            
+            <h2 class="h3 fw-bold mb-4">Informations Clés et Contraintes</h2>
+            
+            <table class="table table-dark table-borderless table-sm fs-5">
+                <tbody>
+                    <tr><th>Durée estimée :</th><td id="prestation-duree">1h 30 min</td></tr>
+                    <tr><th>Tarif :</th><td id="prestation-tarif">De 77 € à 160 €</td></tr>
+                </tbody>
+            </table>
+            
+            <div class="alert alert-warning mt-4 p-3 rounded-3" role="alert">
+                <p class="mb-0 fw-bold">Notes :</p>
+                <p id="prestation-notes" class="mb-0 small">Un diagnostic est réalisé lors du rendez-vous. Le tarif affiché comprend la coloration des racines.</p>
+            </div>
+            
+            <div class="mt-5 d-grid">
+                <a href="/reservation/selection-creneau" class="btn btn-primary btn-lg rounded-pill">
+                    Réserver maintenant
+                </a>
+            </div>
+        </div>
+
+    </section>
+    
+</main>
+
+<!--footer EJS-->
+<%- include('partials/footer2') %>

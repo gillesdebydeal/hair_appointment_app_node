@@ -1,0 +1,159 @@
+
+
+
+Hierarchy
+─────────
+├───.env
+├───.gitignore
+├───api_php.php
+├───hash.js
+├───package-lock.json
+├───package.json
+├───server.js
+│
+├───app
+│   ├───controllers
+│   │   ├───BusinessController.js
+│   │   ├───CalendarController.js
+│   │   ├───RdvController.php
+│   │   ├───ReservationController.js
+│   │   └───UserController.js
+│   ├───Middleware
+│   │   └───AuthMiddleware.php
+│   ├───models
+│   │   ├───BusinessModel.js
+│   │   ├───RdvModel.php
+│   │   ├───ReservationModel.js
+│   │   └───UserModel.js
+│   └───utils
+│       ├───authHelper.js
+│       ├───db.js
+│       ├───Sanitizer.js
+│       └───timeHelper.js
+│
+├───config
+│   └───database.js
+│
+├───Documentation
+│   ├───Création du projet Hair Appointment avec Node.docx
+│   │
+│   └───SQL
+│       ├───base_test_complète.sql
+│       ├───Hair_appointment.sql
+│       └───SQL.csv
+│
+│
+├───public
+│   ├───index.html
+│   │
+│   ├───assets
+│   │   ├───css
+│   │   │   └───style.css
+│   │   ├───img
+│   │   │   ├───couplecover2s.png
+│   │   │   ├───Favicon_MASK.png
+│   │   │   ├───Favicon.png
+│   │   │   ├───logoblancMASK.png
+│   │   │   │
+│   │   │   ├───prestations
+│   │   │   │   ├───adoF_coupe.png
+│   │   │   │   ├───adoG_coupe.png
+│   │   │   │   ├───balayage.png
+│   │   │   │   ├───brushing.png
+│   │   │   │   ├───chignon.png
+│   │   │   │   ├───coloration.png
+│   │   │   │   ├───coupe.png
+│   │   │   │   ├───defrisage.png
+│   │   │   │   ├───enfant_coupe.png
+│   │   │   │   ├───hommeB_coupe.png
+│   │   │   │   ├───hommeC_coupe.png
+│   │   │   │   ├───hommeTond_coupe.png
+│   │   │   │   ├───lissage.png
+│   │   │   │   ├───meches.png
+│   │   │   │   ├───shampoing.png
+│   │   │   │   ├───soin_keratine.png
+│   │   │   │   ├───soin_masque.png
+│   │   │   │   ├───soin_relaxation.png
+│   │   │   │   └───soins.png
+│   │   │   │
+│   │   │   ├───salon
+│   │   │   │   ├───salon_ext.png
+│   │   │   │   ├───salon_ext2.png
+│   │   │   │   ├───salon1.png
+│   │   │   │   ├───salon2.png
+│   │   │   │   ├───salon3.png
+│   │   │   │   └───salon4.png
+│   │   │   │
+│   │   │   ├───social_icon
+│   │   │   │   ├───icons8-facebook-50.png
+│   │   │   │   ├───icons8-google-plus-50.png
+│   │   │   │   ├───icons8-instagram-50.png
+│   │   │   │   ├───icons8-linkedin-50.png
+│   │   │   │   ├───icons8-pinterest-50.png
+│   │   │   │   ├───icons8-tic-tac-50.png
+│   │   │   │   ├───icons8-x-50.png
+│   │   │   │   └───icons8-youtube-50.png
+│   │   │   │
+│   │   │   ├───tendances_elle
+│   │   │   │   ├───beach_waves.png
+│   │   │   │   ├───butterfly_cut.png
+│   │   │   │   ├───curtain_bangs.png
+│   │   │   │   ├───french_bob.png
+│   │   │   │   ├───high_ponytail.png
+│   │   │   │   ├───messy-bun.png
+│   │   │   │   ├───shag_cut.png
+│   │   │   │   ├───sleek_wet_look.png
+│   │   │   │   └───warm_honey.png
+│   │   │   │
+│   │   │   └───tendances_lui
+│   │   │       ├───buzz_cut_homme.png
+│   │   │       ├───caesar_cut_homme.png
+│   │   │       ├───crop_homme.png
+│   │   │       ├───eboy_haircut_homme.png
+│   │   │       ├───mi_long_homme.png
+│   │   │       ├───mullet_homme.png
+│   │   │       ├───quiff_homme.png
+│   │   │       ├───side_part_homme.png
+│   │   │       └───slick_back_homme.png
+│   │   └───js
+│   │       ├───api_tests.js
+│   │       ├───reservation.js
+│   │       └───script.js
+│   │
+│   └───pages
+│       ├───connexion.html
+│       ├───contact.html
+│       ├───detail-prestation.html
+│       ├───faq.html
+│       ├───inscription.html
+│       ├───mentions-legales.html
+│       ├───politique-confidentialite.html
+│       ├───prestations.html
+│       ├───reservation.html
+│       └───salons.html
+│
+├───routes
+│   ├───api.js
+│   └───auth.js
+│
+└───views
+    ├───admin-dashboard.ejs
+    │
+    └───partials
+        ├───footer2.ejs
+        ├───header-admin.ejs
+        └───header2.ejs
+
+
+
+
+
+
+
+
+
+
+
+
+
+

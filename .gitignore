@@ -18,3 +18,7 @@ Thumbs.db
 # Editeurs
 .vscode/
 .idea/
+
+# test et hashing
+api_tests.js
+hash.js

@@ -1,0 +1,49 @@
+<!--header EJS-->
+<%- include('partials/header2') %>
+
+
+
+<section class="reservation-calendar" style="padding-top: 190px;">
+    <h2>📅 Choisir un créneau pour votre prestation</h2>
+    <br>
+    <pre style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 16px;">
+        Bienvenue dans notre système de réservation. 
+        
+        1- Sélectionnez la semaine souhaitée en utilisant les flèches de navigation. 
+        2- Les créneaux disponibles sont affichés en <span class="available-text">Vert</span>. 
+        3- Les créneaux grisés sont déjà réservés ou en dehors des heures d'ouverture. 
+        
+        Cliquez sur le créneau horaire de votre choix pour valider votre rendez-vous.
+    </pre>
+
+    <br>
+    <br>
+
+    <div class="employee-selector">
+    <label for="employee-select">Choisir votre expert : </label>
+    <select id="employee-select">
+        <option value="null">Pas de préférence</option>
+        </select>
+</div>
+    <br>
+    <br>
+    <div class="calendar-navigation">
+        <button id="prev-week" class="btn-secondary calbutton"> < Semaine Préc.</button>
+        <h3 id="current-period">Semaine du ... au ...</h3>
+        <button id="next-week" class="btn-secondary calbutton">Semaine Suiv. ></button>
+    </div>
+
+    <div id="calendar-grid" class="calendar-grid">
+        </div>
+    
+    <div id="booking-message"></div>
+</section>
+
+<script src="/assets/js/reservation.js"></script>
+    <br>
+    <br>
+
+
+
+<!--footer EJS-->
+<%- include('partials/footer2') %>
