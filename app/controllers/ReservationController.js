@@ -1,38 +1,45 @@
+// -----------------------------------------------------------------------------
 // Fichier : app/controllers/ReservationController.js
+// -----------------------------------------------------------------------------
+// Gestion des réservations (client & admin)
+//
+// Contient :
+//  - Récupération des créneaux disponibles
+//  - Création d'un RDV (createReservation)
+//  - Lecture d'un RDV
+//  - Mise à jour d'un RDV
+//  - Annulation d'un RDV
+//  - Historique des RDV d'un client
+// -----------------------------------------------------------------------------
 
-// Importation des Modèles et Utilitaires
 const ReservationModel = require('../models/ReservationModel'); 
 const BusinessModel = require('../models/BusinessModel'); 
-const UserModel = require('../models/UserModel'); 
-const Sanitizer = require('../utils/sanitizer'); // Pour nettoyer les entrées utilisateur
+const Sanitizer = require('../utils/sanitizer');
 
-// Création des instances des modèles pour l'interaction BDD
+// Instances des modèles
 const reservationModel = new ReservationModel();
 const businessModel = new BusinessModel();
-// const userModel = new UserModel(); // Non nécessaire directement ici, car l'ID client doit être dans le JWT/Session
 
 class ReservationController {
-    
-    /**
-     * Endpoint: GET /api/slots?businessId=X&date=Y&prestaId=Z[&employeeId=W]
-     * Gère la récupération des créneaux horaires disponibles.
-     */
+
+    // -------------------------------------------------------------------------
+    // 1) DISPONIBILITÉS JOURNALIÈRES
+    // GET /api/v1/calendar/availability?businessId=X&date=YYYY-MM-DD&prestaId=Y[&employeeId=Z]
+    // (aujourd’hui surtout appelée via CalendarController, mais on la garde)
+    // -------------------------------------------------------------------------
     static async getAvailableSlots(req, res) {
-        // 1. Récupération et désinfection des paramètres de la requête
-        const businessId = parseInt(Sanitizer.sanitize(req.query.businessId));
+        const businessId   = parseInt(Sanitizer.sanitize(req.query.businessId));
         const requestedDate = Sanitizer.sanitize(req.query.date);
         const prestationId = parseInt(Sanitizer.sanitize(req.query.prestaId));
-        // L'employé est facultatif
-        const employeeId = req.query.employeeId ? parseInt(Sanitizer.sanitize(req.query.employeeId)) : null;
+        const employeeId   = req.query.employeeId
+            ? parseInt(Sanitizer.sanitize(req.query.employeeId))
+            : null;
 
-        // 2. Validation de base des données d'entrée
         if (!businessId || !requestedDate || !prestationId) {
-            return res.status(400).json({ message: "Paramètres de recherche de créneau manquants." });
+            return res.status(400).json({ message: "Paramètres manquants." });
         }
-        
+
         try {
-            // 3. Appel du Modèle de Réservation pour le calcul complexe
-            // Le Modèle orchestre les requêtes (horaires, absences, RDV existants) et exécute l'algorithme JS.
             const availability = await reservationModel.checkAvailability(
                 businessId, 
                 requestedDate, 
@@ -40,87 +47,187 @@ class ReservationController {
                 employeeId
             );
 
-            // 4. Réponse
-            if (availability.availableSlots.length === 0) {
-                return res.status(200).json({ message: "Aucun créneau disponible pour cette sélection.", slots: [] });
-            }
-
-            return res.status(200).json({ 
-                message: "Créneaux récupérés avec succès.",
-                slots: availability.availableSlots 
+            return res.status(200).json({
+                message: "Créneaux récupérés.",
+                slots: availability.availableSlots || []
             });
 
         } catch (error) {
-            console.error("Erreur lors de la récupération des créneaux:", error);
-            return res.status(500).json({ message: "Erreur serveur lors de la vérification des disponibilités.", error: error.message });
+            console.error("Erreur getAvailableSlots :", error);
+            return res.status(500).json({ 
+                message: "Erreur serveur lors de la récupération des disponibilités.",
+                error: error.message 
+            });
         }
     }
-    
-    /**
-     * Endpoint: POST /api/book
-     * Gère la création finale d'une réservation (RDV).
-     */
-    static async bookReservation(req, res) {
-        // 1. Logique d'Authentification (FUTURE : Récupérer l'ID utilisateur du Token JWT)
-        // const clientId = req.userId; // Supposons que le middleware JWT place l'ID dans req.userId
-        const clientId = 1; // Simulation de l'ID utilisateur pour le développement
 
-        // 2. Récupération et désinfection des données du formulaire de réservation
-        const businessId = parseInt(Sanitizer.sanitize(req.body.businessId));
-        const prestationId = parseInt(Sanitizer.sanitize(req.body.prestationId));
-        const employeeId = req.body.employeeId ? parseInt(Sanitizer.sanitize(req.body.employeeId)) : null;
-        const dateStart = Sanitizer.sanitize(req.body.dateStart); // DATETIME sélectionné
-        
-        // 3. Validation de base
-        if (!clientId || !prestationId || !dateStart) {
-            return res.status(400).json({ message: "Données de réservation incomplètes ou utilisateur non identifié." });
-        }
-        
+    // -------------------------------------------------------------------------
+    // 2) CRÉATION DE RÉSERVATION (API v1 OFFICIELLE)
+    // POST /api/v1/reservations/book
+    // -------------------------------------------------------------------------
+    static async createReservation(req, res) {
         try {
-            // 4. Calcul de l'heure de fin (Utilisation du BusinessModel)
-            const durationMinutes = await businessModel.getServiceDuration(prestationId);
+            // FUTUR : clientId récupéré via JWT (req.user.id)
+            const clientId = 1; // Temporaire
 
-            if (durationMinutes === 0) {
-                return res.status(400).json({ message: "Durée de la prestation invalide." });
+            const businessId   = parseInt(Sanitizer.sanitize(req.body.businessId));
+            const prestationId = parseInt(Sanitizer.sanitize(req.body.prestationId));
+            const employeeId   = req.body.employeeId
+                ? parseInt(Sanitizer.sanitize(req.body.employeeId))
+                : null;
+            const dateStart    = Sanitizer.sanitize(req.body.dateStart);
+
+            if (!clientId || !businessId || !prestationId || !dateStart) {
+                return res.status(400).json({ message: "Données de réservation incomplètes." });
             }
-            
-            // Calcul de la fin (Logique critique pour la BDD - Nécessite une manipulation de date/heure)
-            // En Node.js, cela se fait via l'objet Date : 
-            const dateEnd = new Date(new Date(dateStart).getTime() + durationMinutes * 60000); 
-            
-            // 5. DOUBLE VÉRIFICATION DE DISPONIBILITÉ (Sécurité Back-End)
-            // On vérifie que le créneau n'a pas été pris entre-temps par un autre client.
-            // *****On pourrait appeler ici une version simplifiée de checkAvailability,
-            // *****ou effectuer une vérification SQL ciblée (SQL LOCK).
-            
-            // 6. Préparation des données finales
-            const reservationData = {
-                clientId: clientId,
-                businessId: businessId,
-                employeeId: employeeId,
-                prestationId: prestationId,
-                dateStart: dateStart,
-                dateEnd: dateEnd.toISOString().slice(0, 19).replace('T', ' ') // Format SQL DATETIME
-            };
-            
-            // 7. Enregistrement de la Réservation (Modèle)
-            const reservationId = await reservationModel.createReservation(reservationData);
-            
-            // FUTURE : Envoyer la notification de confirmation au client (via NotificationModel)
 
-            // 8. Réponse Front-End
-            return res.status(201).json({ 
-                message: "Réservation enregistrée avec succès.", 
-                reservationId: reservationId 
+            // Durée de la prestation (en minutes)
+            const durationMinutes = await businessModel.getServiceDuration(prestationId);
+            if (!durationMinutes) {
+                return res.status(400).json({ message: "Durée de prestation invalide." });
+            }
+
+            // Calcul de la date de fin à partir de dateStart + durée
+            const dateEnd = new Date(new Date(dateStart).getTime() + durationMinutes * 60000);
+
+            const reservationData = {
+                clientId,
+                businessId,
+                prestationId,
+                employeeId,
+                dateStart,
+                dateEnd: dateEnd.toISOString().slice(0, 19).replace("T", " ")
+            };
+
+            const reservationId = await reservationModel.createReservation(reservationData);
+
+            return res.status(201).json({
+                message: "Réservation créée avec succès.",
+                reservationId
             });
 
         } catch (error) {
-            console.error("Erreur lors de l'enregistrement de la réservation:", error);
-            return res.status(500).json({ message: "Erreur interne lors de la réservation.", error: error.message });
+            console.error("Erreur createReservation :", error);
+            return res.status(500).json({
+                message: "Erreur serveur lors de la création du RDV.",
+                error: error.message
+            });
         }
     }
-    
-    // FUTURE : static async cancelReservation(req, res) { ... }
+
+    // -------------------------------------------------------------------------
+    // 3) LECTURE D'UN RDV (Admin / Superadmin)
+    // GET /api/v1/reservations/:id
+    // -------------------------------------------------------------------------
+    static async getReservation(req, res) {
+        const reservationId = parseInt(req.params.id);
+
+        if (!reservationId) {
+            return res.status(400).json({ message: "ID réservation manquant." });
+        }
+
+        try {
+            const rdv = await reservationModel.getReservationById(reservationId);
+
+            if (!rdv) {
+                return res.status(404).json({ message: "RDV introuvable." });
+            }
+
+            return res.json(rdv);
+
+        } catch (error) {
+            console.error("Erreur getReservation :", error);
+            return res.status(500).json({
+                message: "Erreur serveur lors de la récupération du RDV.",
+                error: error.message
+            });
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 4) MISE À JOUR D'UN RDV (Admin)
+    // PUT /api/v1/reservations/:id
+    // Corps (JSON) possible :
+    //  { dateStart, dateEnd, statut, employeeId }
+    // -------------------------------------------------------------------------
+    static async updateReservation(req, res) {
+        const id = parseInt(req.params.id);
+
+        if (!id) {
+            return res.status(400).json({ message: "ID réservation manquant." });
+        }
+
+        try {
+            const updated = await reservationModel.updateReservation(id, req.body);
+
+            return res.json({
+                message: "RDV mis à jour.",
+                updated
+            });
+
+        } catch (error) {
+            console.error("Erreur updateReservation :", error);
+            return res.status(500).json({
+                message: "Erreur lors de la mise à jour du RDV.",
+                error: error.message
+            });
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 5) ANNULATION D'UN RDV (Admin)
+    // DELETE /api/v1/reservations/:id
+    // -------------------------------------------------------------------------
+    static async cancelReservation(req, res) {
+        const id = parseInt(req.params.id);
+
+        if (!id) {
+            return res.status(400).json({ message: "ID réservation manquant." });
+        }
+
+        try {
+            await reservationModel.cancelReservation(id);
+
+            return res.json({
+                message: "RDV annulé avec succès."
+            });
+
+        } catch (error) {
+            console.error("Erreur cancelReservation :", error);
+            return res.status(500).json({
+                message: "Erreur lors de l'annulation du RDV.",
+                error: error.message
+            });
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 6) HISTORIQUE D'UN CLIENT
+    // GET /api/v1/reservations/client/:clientId
+    // -------------------------------------------------------------------------
+    static async getClientReservations(req, res) {
+        const clientId = parseInt(req.params.clientId);
+
+        if (!clientId) {
+            return res.status(400).json({ message: "ID client manquant." });
+        }
+
+        try {
+            const reservations = await reservationModel.getClientReservations(clientId);
+
+            return res.json({
+                clientId,
+                reservations
+            });
+
+        } catch (error) {
+            console.error("Erreur getClientReservations :", error);
+            return res.status(500).json({
+                message: "Erreur lors de la récupération des RDV du client.",
+                error: error.message
+            });
+        }
+    }
 }
 
 module.exports = ReservationController;

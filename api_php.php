@@ -89,8 +89,9 @@ $action = $_GET['action'] ?? 'home';
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($action) {
-    case 'employees':
-        $rdvController->getEmployeesApi();
+    // C'EST CE BLOC QUI MANQUAIT OU NE MARCHAIT PAS
+    case 'resources':
+        $rdvController->getEmployeesApi(); // Méthode qui renvoie Experts + Services + Salons
         break;
 
     case 'availability':
@@ -98,17 +99,25 @@ switch ($action) {
         break;
 
     case 'book':
+        $rdvController->create();
+        break;
+
     case 'rdv':
-        if ($method === 'POST') $rdvController->create();
-        elseif ($method === 'GET') $rdvController->index();
-        elseif ($method === 'DELETE') {
-            $id = $_GET['id'] ?? null;
-            if ($id) $rdvController->delete((int)$id);
-            else echo json_encode(['status' => 'error', 'message' => 'ID manquant']);
+        if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $id = $_GET['id'] ?? 0;
+            $rdvController->delete($id);
+        } else {
+            $rdvController->index();
         }
         break;
 
     default:
-        echo json_encode(['status' => 'success', 'message' => 'API Ready']);
+        // C'est ici que vous tombiez avant
+        echo json_encode([
+            "status" => "success", 
+            "message" => "API Ready. Available actions: resources, availability, book, rdv"
+        ]);
         break;
 }
+
+?>

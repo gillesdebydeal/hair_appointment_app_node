@@ -1,7 +1,5 @@
-<!--header EJS-->
 <%- include('partials/header2') %>
 
-    <!--Présentation des prestations -->
     <main class="container my-5">
     <section class="page-title-section text-white text-center py-5">
         <div class="container mt-5"> 
@@ -10,508 +8,151 @@
         </div>
     </section>
 
-
-
-<!-- ---------- Catalogue des prestations en mode accordéon bootstrap ---------- -->
     <section id="catalogue" class="container py-5">
         
-<!-- Images de la catégorie "Coiffage & Coupe" aligner 3 images sur la largeur de l'accordeon en dessous-->
-
-<div class="container text-center">
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/coupe.png" alt="coupe" class="img-fluid rounded shadow-sm">
+        <div class="container text-center">
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3"><img src="/assets/img/prestations/coupe.png" alt="coupe" class="img-fluid rounded shadow-sm"></div>
+                <div class="col-md-4 mb-3"><img src="/assets/img/prestations/brushing.png" alt="brushing" class="img-fluid rounded shadow-sm"></div>
+                <div class="col-md-4 mb-3"><img src="/assets/img/prestations/chignon.png" alt="chignon" class="img-fluid rounded shadow-sm"></div>
+            </div>
         </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/brushing.png" alt="brushing" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/chignon.png" alt="chignon" class="img-fluid rounded shadow-sm">
-        </div>
-    </div>
-</div>
-
 
         <div class="accordion" id="accordionServices">
-<!-- Partie "Coiffage & Coupe"-->
             <div class="accordion-item shadow-sm mb-3">
-                <h2 class="accordion-header " id="headingCoupe">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCoupe" aria-expanded="true" aria-controls="collapseCoupe">
+                <h2 class="accordion-header" id="headingCoupe">
+                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCoupe">
                         <h2 class="h4 mb-0 prestacordeonH2">Coiffage & Coupe</h2>
                     </button>
                 </h2>
-                <div id="collapseCoupe" class="accordion-collapse collapse show" aria-labelledby="headingCoupe" data-bs-parent="#accordionServices">
+                <div id="collapseCoupe" class="accordion-collapse collapse show" data-bs-parent="#accordionServices">
                     <div class="accordion-body">
-                        
                         <table class="table table-striped table-hover align-middle">
                             <thead>
                                 <tr>
                                     <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
+                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée</th>
                                     <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
-
-<!-- Le rôle principal de la balise <tbody> est de structurer sémantiquement les données d'un tableau HTML.
-Conteneur de Données: Elle doit contenir les lignes de données principales du tableau, définies par les balises <tr> (table row).
-Séparation Logique: Elle sépare clairement les lignes de données de l'en-tête (<thead>) et du pied de page (<tfoot>) du tableau.
-Regroupement: Elle permet au navigateur ou aux technologies d'assistance (comme les lecteurs d'écran) de traiter le corps du tableau comme un groupe unique.
-Stylisation/Scripting: Elle est utile pour appliquer facilement des styles CSS ou manipuler le corps du tableau avec JavaScript, par exemple pour faire défiler uniquement les données tout en gardant l'en-tête fixe. -->
-
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <strong>Shampoing + Coupe + Brushing</strong>
-                                        <p class="text-muted small mb-0 ">Le tarif et la durée varient en fonction de la longueur des cheveux.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">45 min - 60 min</td>
-                                    <td class="text-end">De 56 € à 109 €</td>
-                                    <td class="text-center"><a href="/reservation/shampoing-coupe" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td><strong>Shampoing + Coupe + Brushing</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">45 - 60 min</td>
+                                    <td class="text-end">56 € - 109 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=2" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-                                
                                 <tr>
-                                    <td>
-                                        <strong>Shampoing + Brushing</strong>
-                                        <p class="text-muted small mb-0">Le tarif et la durée peuvent varier selon la longueur du cheveu.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">35 min - 60 min</td>
-                                    <td class="text-end">De 35 € à 68 €</td>
-                                    <td class="text-center"><a href="/reservation/shampoing-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td><strong>Shampoing + Brushing</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">35 - 60 min</td>
+                                    <td class="text-end">35 € - 68 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=1" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-                                
                                 <tr>
-                                    <td>
-                                        <strong>Coupe Frange</strong>
-                                        <p class="text-muted small mb-0">Coupé uniquement sur cheveux propres (hygiène).</p>
-                                    </td>
+                                    <td><strong>Coupe Frange</strong></td>
                                     <td class="text-end d-none d-md-table-cell">10 min</td>
                                     <td class="text-end">11 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-frange" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td class="text-center"><a href="/reservation?prestaId=3" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-                                
                                 <tr>
-                                    <td>
-                                        <strong>Attache / Chignon</strong>
-                                        <p class="text-muted small mb-0">Le temps peut varier suivant la longueur des cheveux et le travail souhaité.</p>
-                                    </td>
+                                    <td><strong>Attache / Chignon</strong></td>
                                     <td class="text-end d-none d-md-table-cell">1h</td>
-                                    <td class="text-end">De 32 € à 140 €</td>
-                                    <td class="text-center"><a href="/reservation/attache-chignon" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td class="text-end">32 € - 140 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=4" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-<!-- Images de la catégorie "Technique" aligner 3 images sur la largeur de l'accordeon en dessous-->
-
-<div class="container text-center">
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/coloration.png" alt="coloration" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/meches.png" alt="meches" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/lissage.png" alt="lissage" class="img-fluid rounded shadow-sm">
-        </div>
-    </div>
-</div>
-
-
-<!-- Partie "Technique"-->
             <div class="accordion-item shadow-sm mb-3">
                 <h2 class="accordion-header" id="headingTechnique">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTechnique" aria-expanded="true" aria-controls="collapseTechnique">
+                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTechnique">
                         <h2 class="h4 mb-0 prestacordeonH2">Technique</h2>
                     </button>
                 </h2>
-                <div id="collapseTechnique" class="accordion-collapse collapse" aria-labelledby="headingTechnique" data-bs-parent="#accordionServices">
+                <div id="collapseTechnique" class="accordion-collapse collapse" data-bs-parent="#accordionServices">
                     <div class="accordion-body">
-                        
                         <table class="table table-striped table-hover align-middle">
-                            <thead>
-                                <p>Un diagnostic est réalisé lors du rendez-vous. Le tarif affiché comprend la coloration des racines. Un supplément peut être appliqué en fonction de la quantité de produit utilisé et de la longueur des cheveux.   </p>
-                                <tr>
-                                    <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
-                                    <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <strong>Coloration + shampoing + brushing</strong>
-                                        <p class="text-muted small mb-0">Il s'agit de l'application des racines. Pour tout travail de décoloration, contacter directement le Salon.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 30 min</td>
-                                    <td class="text-end">De 77 € à 160 €</td>
-                                    <td class="text-center"><a href="/reservation/coloration-shampoing-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td><strong>Coloration + shampoing + brushing</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">1h 30</td>
+                                    <td class="text-end">77 € - 160 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=5" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-
                                 <tr>
-                                    <td>
-                                        <strong>Coloration + shampoing + coupe + brushing</strong>
-                                        <p class="text-muted small mb-0">Il s'agit de l'application des racines. Pour tout travail de décoloration, contacter directement le Salon.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 45 min</td>
+                                    <td><strong>Mèches + shampoing + brushing</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">2h 15</td>
+                                    <td class="text-end">99 € - 250 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=6" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Technique complexe (Sur devis)</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">--</td>
                                     <td class="text-end">Sur devis</td>
-                                    <td class="text-center"><a href="/reservation/coloration-shampoing-coupe-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td class="text-center"><a href="/reservation?prestaId=15" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Mèches + shampoing + brushing</strong>
-                                        <p class="text-muted small mb-0">Selon la longueur et la technique utilisée.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">2h 15 min</td>
-                                    <td class="text-end">De 99 € à 250 €</td>
-                                    <td class="text-center"><a href="/reservation/meches-shampoing-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Mèches + shampoing + coupe + brushing</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">2h 30 min</td>
-                                    <td class="text-end">Sur devis</td>
-                                    <td class="text-center"><a href="/reservation/meches-shampoing-coupe-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Shampoing + Ondulation + brushing</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 30 min</td>
-                                    <td class="text-end">De 77 € à 133 €</td>
-                                    <td class="text-center"><a href="/reservation/shampoing-ondulation-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Shampoing + Ondulation + coupe brushing</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 45 min</td>
-                                    <td class="text-end">Sur devis</td>
-                                    <td class="text-center"><a href="/reservation/shampoing-ondulation-coupe-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Lissage Glatt (artificiel) + shampoing + brushing</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 15 min</td>
-                                    <td class="text-end">De 77 € à 133 €</td>
-                                    <td class="text-center"><a href="/reservation/lissage-glatt-shampoing-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Lissage Glatt (artificiel) + shampoing + coupe + brushing</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 30 min</td>
-                                    <td class="text-end">Sur devis</td>
-                                    <td class="text-center"><a href="/reservation/lissage-glatt-shampoing-coupe-brushing" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-<!-- Images de la catégorie "Soins" aligner 3 images sur la largeur de l'accordeon en dessous-->
-
-<div class="container text-center">
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/soin_relaxation.png" alt="soin relaxation" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/soin_keratine.png" alt="meches" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/soins.png" alt="soins" class="img-fluid rounded shadow-sm">
-        </div>
-    </div>
-</div>
-
-
-<!-- Partie "Soins"-->
             <div class="accordion-item shadow-sm mb-3">
                 <h2 class="accordion-header" id="headingSoins">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSoins" aria-expanded="true" aria-controls="collapseSoins">
+                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSoins">
                         <h2 class="h4 mb-0 prestacordeonH2">Soins</h2>
                     </button>
                 </h2>
-                <div id="collapseSoins" class="accordion-collapse collapse" aria-labelledby="headingSoins" data-bs-parent="#accordionServices">
+                <div id="collapseSoins" class="accordion-collapse collapse" data-bs-parent="#accordionServices">
                     <div class="accordion-body">
-                        
                         <table class="table table-striped table-hover align-middle">
-                            <thead>
-                                <p>Ces prestations sont à sélectionner en complément d'une prestation de coiffage.   </p>
-                                <tr>
-                                    <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
-                                    <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <strong>Masque réparateur</strong>
-                                    </td>
+                                    <td><strong>Masque réparateur</strong></td>
                                     <td class="text-end d-none d-md-table-cell">10 min</td>
                                     <td class="text-end">8 €</td>
-                                    <td class="text-center"><a href="/reservation/masque-reparateur" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td class="text-center"><a href="/reservation?prestaId=7" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-
                                 <tr>
-                                    <td>
-                                        <strong>Soin effet repigmentant</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">15 min</td>
-                                    <td class="text-end">14 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-effet-repigmentant" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td><strong>Soin Botox</strong></td>
+                                    <td class="text-end d-none d-md-table-cell">1h 35</td>
+                                    <td class="text-end">50 € - 104 €</td>
+                                    <td class="text-center"><a href="/reservation?prestaId=9" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin botox</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">1h 35 min</td>
-                                    <td class="text-end">De 50 € à 104 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-botox" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin profond kératine premium</strong>
-                                        <p class="text-muted small mb-0">Le soin se fait sur un cheveu propre.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">3h 30 min</td>
-                                    <td class="text-end">De 275 € à 475 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-profond-keratine-premium" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin exfoliant / apaisant</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">10 min</td>
-                                    <td class="text-end">20 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-exfoliant-apaisant" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin Rituel SPA équilibre</strong>
-                                        <p class="text-muted small mb-0">A sélectionner en complément de votre prestation de coiffage.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">20 min</td>
-                                    <td class="text-end">26 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-rituel-spa-equilibre" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin Rituel SPA Relaxation</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">35 min</td>
-                                    <td class="text-end">46 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-rituel-spa-relaxation" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Soin Rituel SPA Sérénité</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">50 min</td>
-                                    <td class="text-end">66 €</td>
-                                    <td class="text-center"><a href="/reservation/soin-rituel-spa-serenite" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-<!-- Images de la catégorie "Enfants" aligner 3 images sur la largeur de l'accordeon en dessous-->
-
-<div class="container text-center">
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/adoG_coupe.png" alt="adoG coupe" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/adoF_coupe.png" alt="adoF_coupe" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/enfant_coupe.png" alt="enfant coupe" class="img-fluid rounded shadow-sm">
-        </div>
-    </div>
-</div>
-
-
-<!-- Partie "Enfants"-->
-            <div class="accordion-item shadow-sm mb-3">
-                <h2 class="accordion-header" id="headingEnfants">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEnfants" aria-expanded="true" aria-controls="collapseEnfants">
-                        <h2 class="h4 mb-0 prestacordeonH2">Enfants</h2>
-                    </button>
-                </h2>
-                <div id="collapseEnfants" class="accordion-collapse collapse" aria-labelledby="headingEnfants" data-bs-parent="#accordionServices">
-                    <div class="accordion-body">
-                        
-                        <table class="table table-striped table-hover align-middle">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
-                                    <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Coupe Enfant - 7 ans</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">20 min</td>
-                                    <td class="text-end">20 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-enfant-7-ans" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Coupe Enfant 7 à 12 ans</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">30 min</td>
-                                    <td class="text-end">26 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-enfant-7-12-ans" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Coupe Ado de 12 ans à 17 ans</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">35 min</td>
-                                    <td class="text-end">29 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-ado-12-17-ans" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <strong>Coupe ado (jeune fille - 17 ans)</strong>
-                                        <p class="text-muted small mb-0">Le tarif dépend du travail réalisé.</p>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">40 min</td>
-                                    <td class="text-end">De 32 € à 64 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-ado-jeune-fille-17-ans" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>           
-
-<!-- Images de la catégorie "Homme" aligner 3 images sur la largeur de l'accordeon en dessous-->
-
-<div class="container text-center">
-    <div class="row mb-4">
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/hommeB_coupe.png" alt="hommeB coupe" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/hommeTond_coupe.png" alt="hommeTond coupe" class="img-fluid rounded shadow-sm">
-        </div>
-        <div class="col-md-4 mb-3">
-            <img src="../assets/img/prestations/hommeC_coupe.png" alt="enfant coupe" class="img-fluid rounded shadow-sm">
-        </div>
-    </div>
-</div>
-
-<!-- Partie "Homme"-->
             <div class="accordion-item shadow-sm mb-3">
                 <h2 class="accordion-header" id="headingHomme">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHomme" aria-expanded="true" aria-controls="collapseHomme">
+                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHomme">
                         <h2 class="h4 mb-0 prestacordeonH2">Homme</h2>
                     </button>
                 </h2>
-                <div id="collapseHomme" class="accordion-collapse collapse" aria-labelledby="headingHomme" data-bs-parent="#accordionServices">
+                <div id="collapseHomme" class="accordion-collapse collapse" data-bs-parent="#accordionServices">
                     <div class="accordion-body">
-                        
                         <table class="table table-striped table-hover align-middle">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
-                                    <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
-                                </tr>
-                            </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <strong>Coupe Homme</strong>
-                                    </td>
+                                    <td><strong>Coupe Homme</strong></td>
                                     <td class="text-end d-none d-md-table-cell">35 min</td>
                                     <td class="text-end">32 €</td>
-                                    <td class="text-center"><a href="/reservation/coupe-homme" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
+                                    <td class="text-center"><a href="/reservation?prestaId=14" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div> 
+            </div>
 
-<!-- Partie "À la carte"-->
-            <div class="accordion-item shadow-sm mb-3">
-                <h2 class="accordion-header" id="headingCarte">
-                    <button class="accordion-button prestacordeon" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarte" aria-expanded="true" aria-controls="collapseCarte">
-                        <h2 class="h4 mb-0 prestacordeonH2">À la carte</h2>
-                    </button>
-                </h2>
-                <div id="collapseCarte" class="accordion-collapse collapse" aria-labelledby="headingCarte" data-bs-parent="#accordionServices">
-                    <div class="accordion-body">
-                        
-                        <table class="table table-striped table-hover align-middle">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Prestation</th>
-                                    <th scope="col" class="text-end d-none d-md-table-cell">Durée Estimée</th>
-                                    <th scope="col" class="text-end">Tarif</th>
-                                    <th scope="col" class="text-center">Réserver</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Consultation conseil</strong>
-                                    </td>
-                                    <td class="text-end d-none d-md-table-cell">15 min</td>
-                                    <td class="text-end">Jusqu'à 15 €</td>
-                                    <td class="text-center"><a href="/reservation/consultation-conseil" class="btn btn-primary btn-sm rounded-pill">Réserver</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>             
-            
+        </div>
     </section>
-
     </main>       
 
-
-
-
-<!--footer EJS-->
 <%- include('partials/footer2') %>

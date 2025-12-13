@@ -1,52 +1,65 @@
 /* ====================================================================
    Fichier : public/assets/js/script.js
-   Objectif : Rétablir l'effet de scroll Navbar + Connexion API
+   Version : PROD (Navigation + API PHP)
    ==================================================================== */
 
-// URL API (On la garde pour la suite)
 const API_URL = 'http://localhost:8080/hair-appointment-app_nodeJs/api_php.php';
 
-// On attend que le HTML soit chargé
+// Tout le code est encapsulé pour attendre le chargement du HTML
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. GESTION PRIORITAIRE DU HEADER (SCROLL)
+    // 1. Lancer la gestion du Header (Scroll)
+    // C'est ici que l'erreur se produisait : maintenant la fonction existe bien plus bas.
     initNavbarScroll();
 
-    // 2. Menu Mobile
+    // 2. Lancer le Menu Mobile
     initMobileMenu();
 
-    // 3. API : Chargement des services (Uniquement si la grille existe)
-    if (document.getElementById('services-grid')) {
-        loadServicesFromApi();
-    }
+    // 3. Lancer les formulaires (Recherche, Contact...)
+    initForms();
+
+    // 4. Si on est sur la page de Réservation (calendrier), lancer la logique API
+    // (Cette partie sera gérée par reservation.js si vous l'avez séparé, sinon laissez tel quel)
 });
 
 
 /* ====================================================================
-   1. GESTION DU HEADER (VOTRE EFFET RESTAURÉ)
+   1. GESTION DU HEADER (UNIVERSELLE)
    ==================================================================== */
 
-const mainHeader = document.querySelector('.main-header');
+function initNavbarScroll() {
+    // On cherche l'élément Header (.main-header ou .navbar)
+    const header = document.querySelector('.main-header') || document.querySelector('.navbar');
 
-// Définition du seuil de déclenchement (en pixels)
-// Le seuil est fixé à 1200px pour la page d'accueil et à 100px pour toutes les autres pages courtes.
-const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
-const scrollThreshold = isHomePage ? 1200 : 100;
-
-// Vérification de la position de scroll.
-function handleScroll() {
-    // Vérifie si mainHeader existe avant de manipuler ses classes
-    if (mainHeader) { 
-        if (window.scrollY > scrollThreshold) { 
-            mainHeader.classList.add('scrolled'); 
-        } else {    
-            mainHeader.classList.remove('scrolled'); 
-        }
+    if (!header) {
+        console.warn("Navbar introuvable (pas de .main-header ni .navbar)");
+        return; 
     }
-}
 
-// Rattache la fonction à l'événement de défilement de la fenêtre
-window.addEventListener('scroll', handleScroll);
+    // Détection de la page d'accueil
+    const path = window.location.pathname;
+    // On considère accueil si : racine, index.html ou chemin vide
+    const isHomePage = path === '/' || path.endsWith('/index.html') || (path.endsWith('/') && path.length < 2);
+
+    // SEUIL DE SCROLL :
+    // Accueil = 1200px (Grand scroll)
+    // Autres pages = 100px (Scroll rapide)
+    const scrollThreshold = isHomePage ? 1200 : 100;
+
+    console.log(`Page: ${isHomePage ? 'Accueil' : 'Autre'}. Seuil scroll: ${scrollThreshold}px`);
+
+    const handleScroll = () => {
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+
+    // Écouteur
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Vérif immédiate au chargement
+}
 
 
 /* ====================================================================
@@ -59,10 +72,9 @@ function initMobileMenu() {
 
     if (btn && nav) {
         btn.addEventListener('click', () => {
-            // Gestion compatible Bootstrap ou Custom
-            if (nav.classList.contains('collapse')) {
-                // Laissez Bootstrap gérer si c'est du bootstrap standard
-            } else {
+            // Si c'est un bouton Bootstrap standard, il gère lui-même le toggle via data-bs-toggle.
+            // Sinon, on force la classe active.
+            if (!btn.hasAttribute('data-bs-toggle')) {
                 nav.classList.toggle('active');
             }
         });
@@ -71,20 +83,29 @@ function initMobileMenu() {
 
 
 /* ====================================================================
-   3. API PHP (SERVICES DYNAMIQUES)
+   3. GESTION DES FORMULAIRES (Recherche, Contact)
    ==================================================================== */
 
-async function loadServicesFromApi() {
-    try {
-        const response = await fetch(`${API_URL}?action=resources`);
-        const data = await response.json();
+function initForms() {
+    // RECHERCHE
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const p = document.getElementById('search-presta')?.value || '';
+            const l = document.getElementById('search-location')?.value || '';
+            // Redirection vers la réservation
+            window.location.href = `/reservation?search=${encodeURIComponent(p)}&loc=${encodeURIComponent(l)}`;
+        });
+    }
 
-        // Cette fonction ne touche PAS au header, elle remplit juste la grille si elle existe
-        // ... code de remplissage ...
-        // (Je laisse ce bloc vide ou minimal pour ne pas interférer avec votre test visuel)
-        console.log("Services chargés depuis API PHP"); 
-
-    } catch (error) {
-        console.error("Erreur API (non bloquant pour le design):", error);
+    // CONTACT
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Message envoyé !");
+            contactForm.reset();
+        });
     }
 }

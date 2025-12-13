@@ -44,16 +44,17 @@ class UserModel {
         }
     }
 
-    /**
+ /**
      * Recherche un utilisateur par son email (pour la connexion).
      */
     async findByEmail(email) {
-        // Récupère le hash et l'ID (nécessaires pour la vérification Bcrypt et l'authentification)
-        const sql = `SELECT id_user, password_hash, email, nom, prenom FROM ${this.tableName} WHERE email = ?`;
-        
+        // On inclut désormais role_global pour le mettre dans le JWT
+        const sql = `SELECT id_user, password_hash, email, nom, prenom, role_global 
+                    FROM ${this.tableName} 
+                    WHERE email = ?`;
+
         try {
             const [rows] = await db.query(sql, [email]);
-            // Retourne le premier utilisateur trouvé (ou null si aucun)
             return rows[0] || null; 
         } catch (error) {
             throw new Error(`Erreur lors de la recherche par email: ${error.message}`);
